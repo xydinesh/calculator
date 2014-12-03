@@ -1,0 +1,8 @@
+message Numbers{
+  required int32 i = 1;
+  repeated int32 j = 2 [packed=true];
+}
+
+service CalculatorService {
+  rpc Add(Numbers) returns(Numbers);
+}
