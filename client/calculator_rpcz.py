@@ -17,12 +17,21 @@ _CALCULATORSERVICE = descriptor.ServiceDescriptor(
   index=0,
   options=None,
   serialized_start=57,
-  serialized_end=103,
+  serialized_end=135,
   methods=[
   descriptor.MethodDescriptor(
     name='Add',
     full_name='CalculatorService.Add',
     index=0,
+    containing_service=None,
+    input_type=calculator_pb2._NUMBERS,
+    output_type=calculator_pb2._NUMBERS,
+    options=None,
+  ),
+  descriptor.MethodDescriptor(
+    name='Subtract',
+    full_name='CalculatorService.Subtract',
+    index=1,
     containing_service=None,
     input_type=calculator_pb2._NUMBERS,
     output_type=calculator_pb2._NUMBERS,

@@ -42,8 +42,9 @@ void rpcz_protobuf_AddDesc_calculator_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020calculator.proto\"#\n\007Numbers\022\t\n\001i\030\001 \002(\005"
-    "\022\r\n\001j\030\002 \003(\005B\002\020\0012.\n\021CalculatorService\022\031\n\003"
-    "Add\022\010.Numbers\032\010.Numbers", 103);
+    "\022\r\n\001j\030\002 \003(\005B\002\020\0012N\n\021CalculatorService\022\031\n\003"
+    "Add\022\010.Numbers\032\010.Numbers\022\036\n\010Subtract\022\010.Nu"
+    "mbers\032\010.Numbers", 135);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "calculator.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&rpcz_protobuf_ShutdownFile_calculator_2eproto);
@@ -69,6 +70,12 @@ void CalculatorService::Add(const ::Numbers&,
               "Method Add() not implemented.");
 }
 
+void CalculatorService::Subtract(const ::Numbers&,
+                         ::rpcz::reply< ::Numbers> reply) {
+  reply.Error(::rpcz::application_error::METHOD_NOT_IMPLEMENTED,
+              "Method Subtract() not implemented.");
+}
+
 void CalculatorService::call_method(const ::google::protobuf::MethodDescriptor* method,
                              const ::google::protobuf::Message& request,
                              ::rpcz::server_channel* channel) {
@@ -76,6 +83,11 @@ void CalculatorService::call_method(const ::google::protobuf::MethodDescriptor* 
   switch(method->index()) {
     case 0:
       Add(
+          *::google::protobuf::down_cast<const ::Numbers*>(&request),
+          ::rpcz::reply< ::Numbers>(channel));
+      break;
+    case 1:
+      Subtract(
           *::google::protobuf::down_cast<const ::Numbers*>(&request),
           ::rpcz::reply< ::Numbers>(channel));
       break;
@@ -91,6 +103,8 @@ const ::google::protobuf::Message& CalculatorService::GetRequestPrototype(
   switch(method->index()) {
     case 0:
       return ::Numbers::default_instance();
+    case 1:
+      return ::Numbers::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *reinterpret_cast< ::google::protobuf::Message*>(NULL);
@@ -102,6 +116,8 @@ const ::google::protobuf::Message& CalculatorService::GetResponsePrototype(
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
+      return ::Numbers::default_instance();
+    case 1:
       return ::Numbers::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
@@ -137,6 +153,27 @@ void CalculatorService_Stub::Add(const ::Numbers& request,
   rpc.set_deadline_ms(deadline_ms);
   channel_->call_method(service_name_,
                         CalculatorService::descriptor()->method(0),
+                        request, response, &rpc, NULL);
+  rpc.wait();
+  if (!rpc.ok()) {
+    throw ::rpcz::rpc_error(rpc);
+  }
+}
+void CalculatorService_Stub::Subtract(const ::Numbers& request,
+                              ::Numbers* response,
+                              ::rpcz::rpc* rpc,
+                              ::rpcz::closure* done) {
+  channel_->call_method(service_name_,
+                        CalculatorService::descriptor()->method(1),
+                        request, response, rpc, done);
+}
+void CalculatorService_Stub::Subtract(const ::Numbers& request,
+                              ::Numbers* response,
+                              long deadline_ms) {
+  ::rpcz::rpc rpc;
+  rpc.set_deadline_ms(deadline_ms);
+  channel_->call_method(service_name_,
+                        CalculatorService::descriptor()->method(1),
                         request, response, &rpc, NULL);
   rpc.wait();
   if (!rpc.ok()) {

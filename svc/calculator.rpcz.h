@@ -37,6 +37,8 @@ class CalculatorService : public rpcz::service {
 
   virtual void Add(const ::Numbers& request,
                        ::rpcz::reply< ::Numbers> response);
+  virtual void Subtract(const ::Numbers& request,
+                       ::rpcz::reply< ::Numbers> response);
 
   // implements Service ----------------------------------------------
 
@@ -69,6 +71,12 @@ class CalculatorService_Stub {
                        ::Numbers* response,
                        ::rpcz::rpc* rpc,                     ::rpcz::closure* done);
   void Add(const ::Numbers& request,
+                       ::Numbers* response,
+                       long deadline_ms = -1);
+  void Subtract(const ::Numbers& request,
+                       ::Numbers* response,
+                       ::rpcz::rpc* rpc,                     ::rpcz::closure* done);
+  void Subtract(const ::Numbers& request,
                        ::Numbers* response,
                        long deadline_ms = -1);
  private:

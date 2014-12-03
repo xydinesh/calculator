@@ -5,4 +5,5 @@ message Numbers{
 
 service CalculatorService {
   rpc Add(Numbers) returns(Numbers);
+  rpc Subtract(Numbers) returns(Numbers);	
 }

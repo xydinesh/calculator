@@ -78,8 +78,9 @@ void protobuf_AddDesc_calculator_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020calculator.proto\"#\n\007Numbers\022\t\n\001i\030\001 \002(\005"
-    "\022\r\n\001j\030\002 \003(\005B\002\020\0012.\n\021CalculatorService\022\031\n\003"
-    "Add\022\010.Numbers\032\010.Numbers", 103);
+    "\022\r\n\001j\030\002 \003(\005B\002\020\0012N\n\021CalculatorService\022\031\n\003"
+    "Add\022\010.Numbers\032\010.Numbers\022\036\n\010Subtract\022\010.Nu"
+    "mbers\032\010.Numbers", 135);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "calculator.proto", &protobuf_RegisterTypes);
   Numbers::default_instance_ = new Numbers();

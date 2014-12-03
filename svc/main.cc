@@ -15,7 +15,7 @@ namespace calculator
 		     ::rpcz::reply< ::Numbers> reply)
     {
       Numbers response;
-      cout << "Got request " << request.i() << endl;
+      cout << "Addition start with: " << request.i() << endl;
       int sum = request.i();
       int count = request.j_size();
       for (int i = 0; i < count; i++)
@@ -25,6 +25,22 @@ namespace calculator
       response.set_i(sum);
       reply.send(response);
     }
+
+    virtual void Subtract(const ::Numbers& request,
+		     ::rpcz::reply< ::Numbers> reply)
+    {
+      Numbers response;
+      cout << "Subtraction start with: " << request.i() << endl;
+      int result = request.i();
+      int count = request.j_size();
+      for (int i = 0; i < count; i++)
+	{
+	  result -= request.j(i);
+	}
+      response.set_i(result);
+      reply.send(response);
+    }
+
 
   };
 }
